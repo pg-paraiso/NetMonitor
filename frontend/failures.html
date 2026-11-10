@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NetMonitor · Simulação de Falhas</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="failures" data-title="Simulação de Falhas" data-subtitle="Analise impactos e rotas alternativas na infraestrutura">
+<main id="content">
+<div class="err" id="err"></div>
+<div class="banner" id="banner"></div>
+
+<section class="grid fail-grid">
+  <div>
+    <div class="panel map-panel">
+      <div class="panel-h"><div><h2>Impacto na topologia</h2><p>Visualização do enlace indisponível e rota alternativa</p></div></div>
+      <div class="map"><svg id="svg" role="img" aria-label="Impacto na topologia"></svg></div>
+      <div class="legend-bar">
+        <span><i class="l dash" style="border-color:var(--red)"></i>Enlace indisponível</span>
+        <span><i class="l dash" style="border-color:var(--green)"></i>Rota alternativa</span>
+        <span><i class="l" style="border-color:#1f7fb0"></i>Conexão normal</span>
+        <span><i class="l dash" style="border-color:var(--amber)"></i>Enlace selecionado</span>
+      </div>
+    </div>
+
+    <div class="panel" id="comparacao" style="margin-top:16px;display:none"></div>
+
+    <details class="panel exec" id="exec1" style="display:none">
+      <summary><div class="panel-h"><div><h2>1ª execução do Dijkstra · rede original</h2><p>Rota antes da falha</p></div><span class="tg" data-i="chevron"></span></div></summary>
+      <div id="trace1"></div>
+    </details>
+    <details class="panel exec" id="exec2" style="display:none">
+      <summary><div class="panel-h"><div><h2 id="t2">2ª execução do Dijkstra · sem o enlace</h2><p>Grafo reconstruído sem a aresta; o Dijkstra roda novamente</p></div><span class="tg" data-i="chevron"></span></div></summary>
+      <div id="trace2"></div>
+    </details>
+  </div>
+
+  <aside class="panel side">
+    <div class="panel-h"><div><h2>Configurar falha</h2><p>Selecione a conexão para simulação</p></div></div>
+    <div class="sec" style="border-top:0;padding-top:0">
+      <div class="fld"><span class="eyebrow">Origem</span><select class="s" id="origem"></select></div>
+      <div class="fld"><span class="eyebrow">Destino</span><select class="s" id="destino"></select></div>
+      <div class="fld"><span class="eyebrow">Conexão selecionada</span><select class="s" id="enlace"></select></div>
+      <div style="margin-top:16px"><button class="btn primary block" id="simular">Simular falha</button></div>
+      <div class="chips-btn">
+        <span class="eyebrow">Cenários de teste</span>
+        <button id="ex1">SP → BSB sem o enlace RJ ↔ BSB (impacto Moderada)</button>
+        <button id="ex2">SP → SRV-SP-DB sem o enlace SP ↔ SW-SP (sem rota: Crítica)</button>
+      </div>
+    </div>
+    <div class="sec" id="resumo"></div>
+    <div id="altbox"></div>
+    <div class="apply"><button class="btn primary block" id="aplicar" disabled>Aplicar rota alternativa</button></div>
+  </aside>
+</section>
+</main>
+<script src="js/common.js"></script>
+<script src="js/topology-view.js"></script>
+<script src="js/trace.js"></script>
+<script src="js/failures.js"></script>
+</body>
+</html>

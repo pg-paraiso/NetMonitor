@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NetMonitor · Análise de Rotas</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="routes" data-title="Análise de Rotas" data-subtitle="Encontre o melhor caminho entre dois pontos da rede">
+<main id="content">
+<div class="err" id="err"></div>
+<section class="panel">
+  <div class="panel-h"><div><h2>Configurar análise</h2><p>Selecione os pontos e o critério de otimização</p></div></div>
+  <div class="cfg">
+    <div class="field"><label class="eyebrow">Origem</label>
+      <div class="box"><span class="sg" id="sg-o"></span><div class="txt"><b id="tx-o"></b><small id="sb-o"></small></div><span class="ch" id="ch-o"></span><select id="origem" aria-label="Origem"></select></div></div>
+    <button class="swap" id="swap" title="Inverter origem e destino"></button>
+    <div class="field"><label class="eyebrow">Destino</label>
+      <div class="box"><span class="sg" id="sg-d"></span><div class="txt"><b id="tx-d"></b><small id="sb-d"></small></div><span class="ch" id="ch-d"></span><select id="destino" aria-label="Destino"></select></div></div>
+    <div class="cfg-foot">
+      <span class="eyebrow">Critério de rota</span>
+      <div class="seg"><button class="on" id="crit-lat">Menor latência</button><button disabled title="Fora do escopo: o Dijkstra deste projeto minimiza a latência">Maior largura de banda</button></div>
+      <button class="btn primary push" id="analisar">Analisar rota <span id="ico-go"></span></button>
+    </div>
+  </div>
+</section>
+
+<section class="grid route-grid">
+  <div class="panel">
+    <div class="panel-h"><div><h2>Caminho encontrado</h2><p>Rota otimizada por menor latência</p></div><span class="push" id="badge"></span></div>
+    <div id="diagrama"></div>
+    <div class="metrics" id="metricas"></div>
+  </div>
+  <div class="panel">
+    <div class="panel-h"><div><h2>Dispositivos intermediários</h2><p>Detalhamento do caminho calculado</p></div></div>
+    <div id="tabela"></div>
+  </div>
+</section>
+
+<section class="panel why" id="porque"></section>
+
+<details class="panel exec" id="exec" open>
+  <summary><div class="panel-h"><div><h2>Execução do algoritmo</h2><p>Passo a passo do Dijkstra executado pelo backend (dist, pred, fila de prioridade e relaxamento)</p></div><span class="tg" id="tg"></span></div></summary>
+  <div id="trace"></div>
+</details>
+</main>
+<script src="js/common.js"></script>
+<script src="js/topology-view.js"></script>
+<script src="js/trace.js"></script>
+<script src="js/routes.js"></script>
+</body>
+</html>

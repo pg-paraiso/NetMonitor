@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NetMonitor · Topologia da Rede</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="topology" data-title="Topologia da Rede" data-subtitle="Visualização e status dos dispositivos conectados">
+<main id="content">
+<div class="err" id="err"></div>
+<div class="toolbar">
+  <label class="search"><span id="ico-s"></span><input id="busca" placeholder="Buscar dispositivo..." autocomplete="off"></label>
+  <select class="select" id="filtro">
+    <option value="">Todos os dispositivos</option><option value="roteador">Roteadores</option>
+    <option value="switch">Switches</option><option value="servidor">Servidores</option>
+  </select>
+  <span class="dim" style="font-size:11px">Dados simulados</span>
+  <div class="seg" style="margin-left:auto"><button id="v-grafo" class="on">Grafo</button><button id="v-lista">Lista</button></div>
+</div>
+<section class="grid topo-grid">
+  <div class="panel map-panel">
+    <div class="panel-h"><div><h2>Mapa da infraestrutura</h2><p id="map-sub"></p></div>
+      <div class="zoom" id="zoom"><button data-z="-1">−</button><span id="zv">100%</span><button data-z="1">+</button></div></div>
+    <div id="vista-grafo">
+      <div class="map"><svg id="svg" role="img" aria-label="Mapa da topologia"></svg></div>
+      <div class="legend-bar">
+        <span><i class="d" style="background:var(--green)"></i>Operacional</span>
+        <span><i class="d" style="background:var(--amber)"></i>Alerta</span>
+        <span><i class="d" style="background:var(--red)"></i>Indisponível</span>
+        <span><i class="l" style="border-color:#1f7fb0"></i>Conexão ativa</span>
+        <span><i class="l" style="border-color:var(--amber)"></i>Alta latência</span>
+      </div>
+    </div>
+    <div id="vista-lista" style="display:none"></div>
+  </div>
+  <aside class="panel detail" id="detalhe"></aside>
+</section>
+</main>
+<script src="js/common.js"></script>
+<script src="js/topology-view.js"></script>
+<script src="js/topology.js"></script>
+</body>
+</html>
